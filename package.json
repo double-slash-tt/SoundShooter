@@ -1,0 +1,11 @@
+{
+    "name": "com.double-slash-tt.sound",
+    "displayName": "SoundShooter",
+    "version": "0.0.1",
+    "unity": "2018.4",
+    "description": "Unity Sound Management",
+    "author": {
+        "name": "double-slash-tt",
+        "email": "double.slash.thunder@gmail.com"
+    }
+}
