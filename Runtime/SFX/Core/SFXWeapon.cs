@@ -9,5 +9,8 @@ namespace SoundShooter.SFX
 {
     public class SFXWeapon : ScriptableObject
     {
+        public virtual void Setup()
+        {
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace SoundShooter.SFX
     /// <summary>
     /// 
     /// </summary>
-    public class SFXAudioClip : SFXAmmo
+    public class AudioClipAmmo : SFXAmmo
     {
         //===============================
         // SerializeField
@@ -18,7 +18,8 @@ namespace SoundShooter.SFX
         [SerializeField] private AudioClip m_audioClip = default;
 
         //===============================
-        // Method
+        // Property
         //===============================
+        public AudioClip Clip => m_audioClip;
     }
 }
