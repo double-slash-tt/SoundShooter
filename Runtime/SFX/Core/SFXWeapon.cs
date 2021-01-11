@@ -7,10 +7,24 @@ using UnityEngine;
 
 namespace SoundShooter.SFX
 {
-    public class SFXWeapon : ScriptableObject
+    /// <summary>
+    /// 再生用マシン
+    /// </summary>
+    public abstract class SFXWeapon : ScriptableObject, ISFXWeapon
     {
-        public virtual void Setup()
-        {
-        }
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public virtual void Setup() { }
+        
+        /// <summary>
+        /// 発射
+        /// </summary>
+        public abstract ISFXOperation Fire(ISFXAmmo ammo);
+        
+        /// <summary>
+        /// 返還
+        /// </summary>
+        public abstract void Return( ISFXOperation op );
     }
 }

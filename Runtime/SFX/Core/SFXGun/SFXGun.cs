@@ -33,22 +33,31 @@ namespace SoundShooter.SFX
         /// <summary>
         /// 発射
         /// </summary>
-        public void Fire( SFXAmmo ammo )
+        public override ISFXOperation Fire( ISFXAmmo ammo )
         {
             if (!m_grip.CanGrip())
             {
                 // 打てない状況なら無視
-                return;
+                return default;
             }
             if (m_magazine.IsEmpty())
             {
                 // 空なら無理
-                return;
+                return default;
             }
             // 発射処理
             m_magazine.Pop();
             m_grip.Press();
-            m_barrel.Fire( ammo );
+            return m_barrel.Fire(this, ammo);
+        }
+
+        /// <summary>
+        /// 返還
+        /// </summary>
+        public override void Return(ISFXOperation op)
+        {
+            m_barrel.Return(op);
+            m_magazine.Push();
         }
     }
 }

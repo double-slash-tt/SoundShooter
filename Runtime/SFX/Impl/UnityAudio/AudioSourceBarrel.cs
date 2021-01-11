@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace SoundShooter.SFX
+namespace SoundShooter.SFX.Impl
 {
     /// <summary>
     /// AudioClip
     /// </summary>
-    public class SFXAudioSourceBarrel : SFXBarrel<AudioClipAmmo>
+    public class AudioSourceBarrel : SFXBarrel<AudioClipAmmo>
     {
         //======================================
         // Field
         //======================================
+        private ListBuffer<ISFXOperation> m_list = new ListBuffer<ISFXOperation>(() => new SFXAudioClipOperation());
         private AudioSource m_audioSource = default;
 
         //======================================
@@ -35,10 +36,17 @@ namespace SoundShooter.SFX
         /// <summary>
         /// 発射時処理
         /// </summary>
-        protected override void DoFire(AudioClipAmmo ammo)
+        protected override ISFXOperation DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
         {
-            m_audioSource.clip = ammo.Clip;
-            m_audioSource.Play();
+            var op = m_list.Alloc() as SFXAudioClipOperation;
+            op.Setup( weapon, m_audioSource, ammo );
+
+            return op;
+        }
+
+        public override void DoReturn(ISFXOperation op)
+        {
+            m_list.Free(op);
         }
     }
 }
