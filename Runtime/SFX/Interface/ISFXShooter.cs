@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundShooter.SFX
 {
-    public interface ISFXShooter
+    public interface ISFXShooter : ISoundShooter
     {
         void Fire(ISFXWeapon weapon, ISFXAmmo ammo);
     }

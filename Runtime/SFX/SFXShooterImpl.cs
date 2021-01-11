@@ -8,6 +8,9 @@ namespace SoundShooter.SFX
 {
     public static partial class SFXShooter
     {
+        //====================================
+        // class
+        //====================================
         /// <summary>
         /// 内部実装
         /// </summary>
@@ -16,11 +19,24 @@ namespace SoundShooter.SFX
             //========================================
             // Field
             //========================================
-            private List<ISFXOperation> m_list = new List<ISFXOperation>();
+            private List<ISFXPlayback> m_list = new List<ISFXPlayback>();
 
             //========================================
             // Method
             //========================================
+
+            internal SFXShooterImpl()
+            {
+                ShooterServices.Register(this);
+            }
+            /// <summary>
+            /// 破棄処理
+            /// </summary>
+            public void Dispose()
+            {
+                m_list.Clear();
+            }
+
             /// <summary>
             /// 再生処理
             /// </summary>
@@ -39,7 +55,7 @@ namespace SoundShooter.SFX
             /// <summary>
             /// 更新処理
             /// </summary>
-            public void DoUpdate( float dt )
+            public void OnUpdate( float dt )
             {
                 for (int i = m_list.Count - 1; i >= 0; i--)
                 {

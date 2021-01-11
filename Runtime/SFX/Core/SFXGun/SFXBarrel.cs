@@ -21,15 +21,15 @@ namespace SoundShooter.SFX
         /// 発射
         /// </summary>
         /// <param name="ammo"></param>
-        public abstract ISFXOperation Fire(ISFXWeapon weapon, ISFXAmmo ammo);
+        public abstract ISFXPlayback Fire(ISFXWeapon weapon, ISFXAmmo ammo);
         /// <summary>
         /// 返還
         /// </summary>
-        public abstract void Return(ISFXOperation op);
+        public abstract void Return(ISFXPlayback op);
     }
     public abstract class SFXBarrel<TAmmo> : SFXBarrel where TAmmo : SFXAmmo
     {
-        public sealed override ISFXOperation Fire(ISFXWeapon weapon, ISFXAmmo ammo)
+        public sealed override ISFXPlayback Fire(ISFXWeapon weapon, ISFXAmmo ammo)
         {
             if (ammo is TAmmo tAmmo)
             {
@@ -37,12 +37,12 @@ namespace SoundShooter.SFX
             }
             return default;
         }
-        protected abstract ISFXOperation DoFire(ISFXWeapon weapon, TAmmo ammo);
+        protected abstract ISFXPlayback DoFire(ISFXWeapon weapon, TAmmo ammo);
 
-        public sealed override void Return(ISFXOperation op)
+        public sealed override void Return(ISFXPlayback op)
         {
             DoReturn(op);
         }
-        public abstract void DoReturn(ISFXOperation op);
+        public abstract void DoReturn(ISFXPlayback op);
     }
 }

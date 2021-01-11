@@ -10,7 +10,7 @@ namespace SoundShooter.SFX.Impl
     /// <summary>
     /// AudioClipを再生する処理
     /// </summary>
-    public class SFXAudioClipOperation : SFXOperation
+    public class SFXAudioClipPlayback : SFXPlayback
     {
         //============================================
         // Field

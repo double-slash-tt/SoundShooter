@@ -13,7 +13,7 @@ namespace SoundShooter.SFX
     {
     }
 
-    public interface ISFXOperation : ISFXHandle
+    public interface ISFXPlayback : ISFXHandle
     {
         bool IsPlaying { get; }
 

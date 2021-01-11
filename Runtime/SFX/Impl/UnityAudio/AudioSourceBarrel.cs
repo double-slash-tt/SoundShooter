@@ -15,7 +15,7 @@ namespace SoundShooter.SFX.Impl
         //======================================
         // Field
         //======================================
-        private ListBuffer<ISFXOperation> m_list = new ListBuffer<ISFXOperation>(() => new SFXAudioClipOperation());
+        private ListBuffer<ISFXPlayback> m_list = new ListBuffer<ISFXPlayback>(() => new SFXAudioClipPlayback());
         private AudioSource m_audioSource = default;
 
         //======================================
@@ -36,15 +36,15 @@ namespace SoundShooter.SFX.Impl
         /// <summary>
         /// 発射時処理
         /// </summary>
-        protected override ISFXOperation DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
+        protected override ISFXPlayback DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
         {
-            var op = m_list.Alloc() as SFXAudioClipOperation;
+            var op = m_list.Alloc() as SFXAudioClipPlayback;
             op.Setup( weapon, m_audioSource, ammo );
 
             return op;
         }
 
-        public override void DoReturn(ISFXOperation op)
+        public override void DoReturn(ISFXPlayback op)
         {
             m_list.Free(op);
         }

@@ -9,7 +9,7 @@ namespace SoundShooter.SFX
     /// <summary>
     /// 発生音の状態管理をするもの
     /// </summary>
-    public abstract class SFXOperation : ISFXOperation
+    public abstract class SFXPlayback : ISFXPlayback
     {
         //=========================================
         // Field
