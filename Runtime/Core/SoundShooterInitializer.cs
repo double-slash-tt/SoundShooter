@@ -10,7 +10,7 @@ namespace SoundShooter
         //===================================
         // SerializeField
         //===================================
-        [SerializeField] private GameObject m_go = default;
+        [SerializeField] private ShooterServiceProvider m_provider = default;
 
         //===================================
         // Field
@@ -39,7 +39,7 @@ namespace SoundShooter
             }
             ms_isInit = true;
             ms_singleton = this;
-            ShooterServices.Provide();
+            ShooterServices.Provide( m_provider );
         }
     }
 }

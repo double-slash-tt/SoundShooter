@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 
 namespace SoundShooter.SFX
 {
-    public static partial class SFXShooter
+    internal static partial class SFXShooter
     {
+        //====================================
+        // Method
+        //====================================
+        internal static void Provide(IReadOnlyList<ISFXWeapon> weapons )
+        {
+            Shooter = new SFXShooterImpl( weapons );
+        }
+
         //====================================
         // class
         //====================================
         /// <summary>
         /// 内部実装
         /// </summary>
-        public class SFXShooterImpl : ISFXShooter
+        internal class SFXShooterImpl : ISFXShooter
         {
             //========================================
             // Field
@@ -25,8 +33,12 @@ namespace SoundShooter.SFX
             // Method
             //========================================
 
-            internal SFXShooterImpl()
+            internal SFXShooterImpl(IReadOnlyList<ISFXWeapon> weapons)
             {
+                foreach (var w in weapons)
+                {
+                    w.Setup();
+                }
                 ShooterServices.Register(this);
             }
             /// <summary>
@@ -42,31 +54,30 @@ namespace SoundShooter.SFX
             /// </summary>
             public void Fire(ISFXWeapon weapon, ISFXAmmo ammo)
             {
-                var op = weapon.Fire( ammo );
-                if (op == null)
-                {
-                    return;
-                }
-
-                m_list.Add(op);
+                weapon.Fire(this, ammo);
             }
 
 
             /// <summary>
             /// 更新処理
             /// </summary>
-            public void OnUpdate( float dt )
+            public void OnUpdate(float dt)
             {
                 for (int i = m_list.Count - 1; i >= 0; i--)
                 {
                     var op = m_list[i];
-                    op.OnUpdate( dt );
-                    if (!op.IsPlaying )
+                    op.OnUpdate(dt);
+                    if (!op.IsPlaying)
                     {
                         op.Stop();
                         m_list.RemoveAt(i);
                     }
                 }
+            }
+
+            public void Shot(ISFXPlayback playback)
+            {
+                m_list.Add(playback);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace SoundShooter.SFX
     /// <summary>
     /// 
     /// </summary>
-    public class SFXGun : SFXWeapon
+    public abstract class SFXGun : SFXWeapon
     {
         //=================================
         // SerializeField
@@ -33,20 +33,28 @@ namespace SoundShooter.SFX
         /// <summary>
         /// 発射
         /// </summary>
-        public override ISFXPlayback Fire( ISFXAmmo ammo )
+        public override void Fire(ISFXShooter shooter, ISFXAmmo ammo)
         {
             if (!m_grip.CanGrip())
             {
                 // 打てない状況なら無視
-                return default;
+                return;
             }
             if (m_magazine.IsEmpty())
             {
                 // 空なら無理
-             ///   return default;
+                return;
             }
+            DoFire(shooter, ammo);
+        }
+        protected abstract void DoFire(ISFXShooter shooter, ISFXAmmo ammo);
+
+        
+        protected ISFXPlayback Shot(ISFXAmmo ammo)
+        {
             return m_barrel.Fire(this, ammo);
         }
+
 
         /// <summary>
         /// 返還

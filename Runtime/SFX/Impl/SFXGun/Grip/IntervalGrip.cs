@@ -8,8 +8,9 @@ using UnityEngine;
 namespace SoundShooter.SFX.Impl
 {
     /// <summary>
-    /// 
+    /// 一定時間ごとロックするもの
     /// </summary>
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(SFX) + "/" + nameof(SFXGun) + "/" + nameof(SFXGrip) + "/" + nameof(IntervalGrip))]
     public sealed class IntervalGrip : SFXGrip
     {
         //====================================

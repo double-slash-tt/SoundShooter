@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SoundShooter.SFX
 {
-    public static partial class SFXShooter
+    internal static partial class SFXShooter
     {
         //=================================
         // Property
         //=================================
-        private static ISFXShooter Shooter { get; }
+        private static ISFXShooter Shooter { get; set; }
 
         //=================================
         // Method

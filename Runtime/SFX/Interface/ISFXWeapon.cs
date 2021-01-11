@@ -11,11 +11,12 @@ namespace SoundShooter.SFX
         /// <summary>
         /// 発射
         /// </summary>
-        ISFXPlayback Fire(ISFXAmmo ammo);
+        void Fire(ISFXShooter shooter, ISFXAmmo ammo);
 
         /// <summary>
         /// 回収
         /// </summary>
         void Return(ISFXPlayback op);
+        void Setup();
     }
 }

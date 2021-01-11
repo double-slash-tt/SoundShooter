@@ -10,6 +10,7 @@ namespace SoundShooter.SFX.Impl
     /// <summary>
     /// 弾数制限
     /// </summary>
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(SFX) + "/" + nameof(SFXGun) + "/" + nameof(SFXMagazine) + "/" + nameof(LimitMagazine))]
     public class LimitMagazine : SFXMagazine
     {
         //=======================================

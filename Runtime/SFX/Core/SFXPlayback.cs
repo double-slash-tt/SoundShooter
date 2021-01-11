@@ -29,6 +29,7 @@ namespace SoundShooter.SFX
         {
             if (!m_isBegining)
             {
+                m_isBegining = true;
                 Begin();
             }
             DoUpdate(dt);
@@ -38,13 +39,13 @@ namespace SoundShooter.SFX
         protected void Begin()
         {
             DoBegin();
-            m_isBegining = true;
         }
         protected abstract void DoBegin();
 
         public void Stop()
         {
             DoStop();
+            m_isBegining = false;
         }
         protected abstract void DoStop();
     }

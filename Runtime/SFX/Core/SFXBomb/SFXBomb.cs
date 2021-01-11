@@ -8,7 +8,7 @@ namespace SoundShooter.SFX
 {
     public class SFXBomb : SFXWeapon
     {
-        public override ISFXPlayback Fire(ISFXAmmo ammo)
+        public override void Fire(ISFXShooter shooter, ISFXAmmo ammo)
         {
             throw new NotImplementedException();
         }

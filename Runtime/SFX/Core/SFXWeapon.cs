@@ -16,12 +16,12 @@ namespace SoundShooter.SFX
         /// 初期化
         /// </summary>
         public virtual void Setup() { }
-        
+
         /// <summary>
         /// 発射
         /// </summary>
-        public abstract ISFXPlayback Fire(ISFXAmmo ammo);
-        
+        public abstract void Fire(ISFXShooter shooter, ISFXAmmo ammo);
+
         /// <summary>
         /// 返還
         /// </summary>

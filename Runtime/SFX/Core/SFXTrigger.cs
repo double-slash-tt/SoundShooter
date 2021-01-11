@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace SoundShooter.SFX
 {
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(SFX) + "/" + nameof(SFXTrigger))]
     public class SFXTrigger : ScriptableObject
     {
         //=========================================

@@ -37,9 +37,9 @@ namespace SoundShooter
         //==========================================
         // Method
         //==========================================
-        public static void Provide()
+        public static void Provide(ShooterServiceProvider provider)
         {
-            var _ = Instance;
+            provider.Provide();
         }
         public static void Register(ISoundShooter shooter)
         {

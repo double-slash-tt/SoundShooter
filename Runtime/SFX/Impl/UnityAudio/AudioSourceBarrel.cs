@@ -10,6 +10,7 @@ namespace SoundShooter.SFX.Impl
     /// <summary>
     /// AudioClip
     /// </summary>
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(SFX) + "/" + nameof(SFXGun) + "/" + nameof(SFXBarrel) + "/" + nameof(AudioSourceBarrel))]
     public class AudioSourceBarrel : SFXBarrel<AudioClipAmmo>
     {
         //======================================

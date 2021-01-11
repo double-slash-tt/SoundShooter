@@ -8,8 +8,9 @@ using UnityEngine;
 namespace SoundShooter.SFX
 {
     /// <summary>
-    /// 
+    /// 音源アセット
     /// </summary>
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(SFX) + "/" + nameof(SFXAmmo) + "/" + nameof(AudioClipAmmo))]
     public class AudioClipAmmo : SFXAmmo
     {
         //===============================

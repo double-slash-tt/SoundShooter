@@ -9,5 +9,6 @@ namespace SoundShooter.SFX
     public interface ISFXShooter : ISoundShooter
     {
         void Fire(ISFXWeapon weapon, ISFXAmmo ammo);
+        void Shot(ISFXPlayback playback);
     }
 }
