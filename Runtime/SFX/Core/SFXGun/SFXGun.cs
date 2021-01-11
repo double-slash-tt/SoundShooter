@@ -52,6 +52,8 @@ namespace SoundShooter.SFX
         
         protected ISFXPlayback Shot(ISFXAmmo ammo)
         {
+            m_grip.Press();
+            m_magazine.Pop();
             return m_barrel.Fire(this, ammo);
         }
 
