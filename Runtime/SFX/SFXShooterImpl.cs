@@ -28,6 +28,7 @@ namespace SoundShooter.SFX
             // Field
             //========================================
             private List<ISFXPlayback> m_list = new List<ISFXPlayback>();
+            private HashSet<ISFXWeapon> m_weapons = new HashSet<ISFXWeapon>();
 
             //========================================
             // Method
@@ -38,6 +39,7 @@ namespace SoundShooter.SFX
                 foreach (var w in weapons)
                 {
                     w.Setup();
+                    m_weapons.Add(w);
                 }
                 ShooterServices.Register(this);
             }
@@ -63,6 +65,11 @@ namespace SoundShooter.SFX
             /// </summary>
             public void OnUpdate(float dt)
             {
+                foreach (var w in m_weapons)
+                {
+                    w.OnUpdate( dt );
+                }
+
                 for (int i = m_list.Count - 1; i >= 0; i--)
                 {
                     var op = m_list[i];

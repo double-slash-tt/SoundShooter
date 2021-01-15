@@ -16,6 +16,12 @@ namespace SoundShooter.SFX.Impl
         //======================================
         // Field
         //======================================
+        [SerializeField] private PowderBalance m_balance = default;
+        [SerializeField] private VolumePowder m_powder = default;
+
+        //======================================
+        // Field
+        //======================================
         private ListBuffer<ISFXPlayback> m_list = new ListBuffer<ISFXPlayback>(() => new SFXAudioClipPlayback());
         private AudioSource m_audioSource = default;
 
@@ -26,7 +32,7 @@ namespace SoundShooter.SFX.Impl
         /// <summary>
         /// 初期化処理
         /// </summary>
-        public override void Setup()
+        public sealed override void Setup()
         {
             if (!m_audioSource)
             {
@@ -37,7 +43,7 @@ namespace SoundShooter.SFX.Impl
         /// <summary>
         /// 発射時処理
         /// </summary>
-        protected override ISFXPlayback DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
+        protected sealed override ISFXPlayback DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
         {
             var op = m_list.Alloc() as SFXAudioClipPlayback;
             op.Setup( weapon, m_audioSource, ammo );
@@ -45,9 +51,27 @@ namespace SoundShooter.SFX.Impl
             return op;
         }
 
-        public override void DoReturn(ISFXPlayback op)
+        /// <summary>
+        /// 返還
+        /// </summary>
+        public sealed override void DoReturn(ISFXPlayback op)
         {
             m_list.Free(op);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public sealed override void OnUpdate(float dt)
+        {
+            if (m_powder && m_balance && m_audioSource )
+            {
+                var volume = m_powder.Evaluate(m_balance.Ratio);
+                if (!Mathf.Approximately(volume, m_audioSource.volume))
+                {
+                    m_audioSource.volume = volume;
+                }
+            }
         }
     }
 }

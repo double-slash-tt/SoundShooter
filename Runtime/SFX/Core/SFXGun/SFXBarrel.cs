@@ -26,6 +26,8 @@ namespace SoundShooter.SFX
         /// 返還
         /// </summary>
         public abstract void Return(ISFXPlayback op);
+
+        public abstract void OnUpdate(float dt);
     }
     public abstract class SFXBarrel<TAmmo> : SFXBarrel where TAmmo : SFXAmmo
     {

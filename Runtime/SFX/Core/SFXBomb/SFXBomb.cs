@@ -10,10 +10,11 @@ namespace SoundShooter.SFX
     {
         public override void Fire(ISFXShooter shooter, ISFXAmmo ammo)
         {
-            throw new NotImplementedException();
         }
-
         public override void Return(ISFXPlayback op)
+        {
+        }
+        public override void OnUpdate(float dt)
         {
         }
     }

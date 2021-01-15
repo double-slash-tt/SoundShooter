@@ -18,5 +18,6 @@ namespace SoundShooter.SFX
         /// </summary>
         void Return(ISFXPlayback op);
         void Setup();
+        void OnUpdate(float dt);
     }
 }

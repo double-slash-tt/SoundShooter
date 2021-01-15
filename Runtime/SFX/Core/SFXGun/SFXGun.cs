@@ -66,5 +66,13 @@ namespace SoundShooter.SFX
             m_barrel.Return(op);
             m_magazine.Push();
         }
+
+        /// <summary>
+        /// 定期処理
+        /// </summary>
+        public override void OnUpdate(float dt)
+        {
+            m_barrel.OnUpdate( dt );
+        }
     }
 }

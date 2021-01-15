@@ -26,5 +26,10 @@ namespace SoundShooter.SFX
         /// 返還
         /// </summary>
         public abstract void Return( ISFXPlayback op );
+        
+        /// <summary>
+        /// 定期処理
+        /// </summary>
+        public abstract void OnUpdate(float dt);
     }
 }
