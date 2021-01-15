@@ -39,6 +39,7 @@ namespace SoundShooter.SFX.Impl
 
         protected override void DoBegin()
         {
+            //Source.clip = Ammo.Clip;
             Source.PlayOneShot( Ammo.Clip );
         }
 

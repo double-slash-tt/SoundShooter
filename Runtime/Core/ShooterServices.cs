@@ -49,5 +49,21 @@ namespace SoundShooter
             }
             Instance.Refister(shooter);
         }
+
+        public static void OnUpdate(float dt)
+        {
+            if (!Instance)
+            {
+                return;
+            }
+            Instance.OnUpdate(dt);
+        }
+
+        public static T Instantiate<T>(string name) where T : Component
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(Instance.transform);
+            return go.AddComponent<T>();
+        }
     }
 }

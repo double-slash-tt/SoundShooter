@@ -31,7 +31,7 @@ namespace SoundShooter.SFX.Impl
         {
             var t = Time.time - m_lastPressTime;
 
-            return t < m_intervalTime;
+            return t >= m_intervalTime;
         }
 
         public override void Press()

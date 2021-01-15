@@ -30,7 +30,7 @@ namespace SoundShooter.SFX.Impl
         {
             if (!m_audioSource)
             {
-
+                m_audioSource = ShooterServices.Instantiate<AudioSource>( name );
             }
         }
 
