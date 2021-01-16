@@ -16,12 +16,6 @@ namespace SoundShooter.SFX.Impl
         //======================================
         // Field
         //======================================
-        [SerializeField] private PowderBalance m_balance = default;
-        [SerializeField] private VolumePowder m_powder = default;
-
-        //======================================
-        // Field
-        //======================================
         private ListBuffer<ISFXPlayback> m_list = new ListBuffer<ISFXPlayback>(() => new SFXAudioClipPlayback());
         private AudioSource m_audioSource = default;
 
@@ -64,9 +58,9 @@ namespace SoundShooter.SFX.Impl
         /// </summary>
         public sealed override void OnUpdate(float dt)
         {
-            if (m_powder && m_balance && m_audioSource )
+            if (Powder && m_audioSource )
             {
-                var volume = m_powder.Evaluate(m_balance.Ratio);
+                var volume = Powder.Ratio;
                 if (!Mathf.Approximately(volume, m_audioSource.volume))
                 {
                     m_audioSource.volume = volume;

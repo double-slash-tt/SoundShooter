@@ -10,6 +10,16 @@ namespace SoundShooter.SFX
     public abstract class SFXBarrel : ScriptableObject
     {
         //===========================================
+        // SerializeField
+        //===========================================
+        [SerializeField] private VolumePowder m_powder = default;
+
+        //===========================================
+        // Property
+        //===========================================
+        protected VolumePowder Powder => m_powder;
+
+        //===========================================
         // Method
         //===========================================
 

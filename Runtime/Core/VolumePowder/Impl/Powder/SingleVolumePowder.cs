@@ -3,11 +3,8 @@ using UnityEngine;
 
 namespace SoundShooter
 {
-    /// <summary>
-    /// VolumePowderの中間パラメータを管理するオブジェクト
-    /// </summary>
-    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(VolumePowder) + "/" + nameof(PowderBalance), order = -100)]
-    public class PowderBalance : ScriptableObject
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(VolumePowder) + "/" + nameof(SingleVolumePowder))]
+    public class SingleVolumePowder : VolumePowder
     {
         //================================
         // SerializeField
@@ -23,12 +20,12 @@ namespace SoundShooter
         //================================
         // Property
         //================================
-        public float Ratio => m_ratio;
+        public override float Ratio => m_ratio;
 
         //================================
         // Method
         //================================
-        public void Set(float ratio) => m_ratio = Mathf.Clamp01( ratio );
+        public void Set(float ratio) => m_ratio = Mathf.Clamp01(ratio);
 
         private void OnValidate()
         {

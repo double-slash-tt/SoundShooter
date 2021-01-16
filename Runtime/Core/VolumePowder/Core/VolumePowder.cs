@@ -1,27 +1,13 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 
 namespace SoundShooter
 {
     /// <summary>
-    /// 再生ボリュームのコントロール装置
+    /// VolumePowderの中間パラメータを管理するオブジェクト
     /// </summary>
-    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(VolumePowder) + "/" + nameof(VolumePowder), order = -1)]
-    public class VolumePowder : ScriptableObject
+    public abstract class VolumePowder : ScriptableObject
     {
-        //===================================
-        // SerializeField
-        //===================================
-        [SerializeField] private AnimationCurve m_curve = AnimationCurve.Constant(0, 1, 1);
-
-        //===================================
-        // Method
-        //===================================
-
-        public virtual float Evaluate(float ratio)
-        {
-            return DoEvaluate( ratio );
-        }
-        protected float DoEvaluate(float ratio) => m_curve.Evaluate(ratio);
+        public abstract float Ratio { get; }
     }
 }
