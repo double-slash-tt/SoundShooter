@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace SoundShooter.SFX
+namespace SoundShooter.SFX.Impl
 {
     /// <summary>
     /// 音源アセット

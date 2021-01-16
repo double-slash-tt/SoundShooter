@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SoundShooter.SFX
 {
-    public class SFXAmmo : ScriptableObject, ISFXAmmo
+    public abstract class SFXAmmo : ScriptableObject, ISFXAmmo
     {
     }
 }
