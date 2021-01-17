@@ -14,7 +14,7 @@ namespace SoundShooter.Music.Impl
         //======================================
         // Field
         //======================================
-
+        [SerializeField] private VolumePowder m_powder = default;
         [SerializeField] private int m_bufferCount = 3;
 
         //======================================
@@ -50,7 +50,7 @@ namespace SoundShooter.Music.Impl
         protected override IMusicPlayback DoFire(AudioClipAmmo ammo)
         {
             var source = GetSource();
-            return new UnityAudioPlayback(source, ammo);
+            return new UnityAudioPlayback(source, ammo, m_powder);
         }
 
         private AudioSource GetSource() 
