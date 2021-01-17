@@ -18,23 +18,27 @@ namespace SoundShooter.Music
         /// 通常再生
         /// </summary>
         /// <param name="ammo"></param>
-        internal static void Fire( IMusicAmmo ammo )
+        internal static void Fire(IMusicGun gun, IMusicAmmo ammo)
         {
-            Shooter?.Fire( ammo );
+            Shooter?.Fire(gun, ammo);
         }
         /// <summary>
         /// 履歴を戻して再生
         /// </summary>
-        internal static void Pop()
+        internal static void Pop(IMusicGun gun)
         {
-            Shooter?.Pop();
+            Shooter?.Pop( gun );
         }
         /// <summary>
         /// 履歴に積んで再生
         /// </summary>
-        internal static void Push(IMusicAmmo ammo)
+        internal static void Push(IMusicGun gun, IMusicAmmo ammo)
         {
-            Shooter?.Push(ammo);
+            Shooter?.Push(gun, ammo);
+        }
+        internal static void Stop(IMusicGun gun )
+        {
+            Shooter?.Stop(gun);
         }
     }
 }

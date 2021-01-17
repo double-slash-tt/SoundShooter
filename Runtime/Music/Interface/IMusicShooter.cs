@@ -5,10 +5,9 @@ namespace SoundShooter.Music
 {
     public interface IMusicShooter : ISoundShooter
     {
-        IReadOnlyList<IMusicPlayback> PlayList { get; }
-
-        void Fire(IMusicAmmo ammo);
-        void Pop();
-        void Push(IMusicAmmo ammo);
+        void Fire(IMusicGun gun, IMusicAmmo ammo);
+        void Pop(IMusicGun gun);
+        void Push(IMusicGun gun, IMusicAmmo ammo);
+        void Stop(IMusicGun gun);
     }
 }

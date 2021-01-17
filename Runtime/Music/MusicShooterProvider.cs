@@ -11,14 +11,14 @@ namespace SoundShooter.Music
         //===================================
         // SerializeField
         //===================================
-        [SerializeField] private MusicGun m_gun = default;
+        [SerializeField] private MusicGun[] m_guns = default;
 
         //===================================
         // Method 
         //===================================
         public override void Provide()
         {
-            MusicShooter.Provide( m_gun );
+            MusicShooter.Provide( m_guns );
         }
     }
 }

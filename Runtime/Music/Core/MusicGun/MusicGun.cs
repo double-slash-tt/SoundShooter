@@ -25,13 +25,10 @@ namespace SoundShooter.Music
             m_barrel.Setup();
         }
 
-        public (IMusicPlayback, IMusicShot) Fire(IMusicShooter shooter, IMusicAmmo ammo)
+        public IMusicPlayback Fire( IMusicAmmo ammo )
         {
-            var playback = m_barrel.Fire(ammo);
-            var shot = Shot(shooter, playback);
-            return (playback, shot);
+            return m_barrel.Fire(ammo);
         }
-
-        protected abstract IMusicShot Shot(IMusicShooter shooter, IMusicPlayback playback);
+        public abstract IMusicShot Shot(IMusicPlayer player, IMusicPlayback playback);
     }
 }

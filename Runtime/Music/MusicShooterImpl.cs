@@ -8,9 +8,9 @@ namespace SoundShooter.Music
         //======================================
         // static
         //======================================
-        internal static void Provide(IMusicGun weapon)
+        internal static void Provide(IReadOnlyList<IMusicGun> guns)
         {
-            Shooter = new MusicShooterImpl(weapon);
+            Shooter = new MusicShooterImpl(guns);
         }
 
         //======================================
@@ -22,118 +22,68 @@ namespace SoundShooter.Music
             //==========================================
             // Field
             //==========================================
-            private List<IMusicPlayback> m_playList = new List<IMusicPlayback>();
-            private Stack<IMusicAmmo> m_history = new Stack<IMusicAmmo>();
-            private IMusicShot m_shot = default;
-            private IMusicGun m_gun = default;
-
-            //==========================================
-            // Property
-            //==========================================
-            public IReadOnlyList<IMusicPlayback> PlayList => m_playList;
+            private Dictionary<IMusicGun, IMusicPlayer> m_table = new Dictionary<IMusicGun, IMusicPlayer>();
 
             //==========================================
             // Method
             //==========================================
 
-            internal MusicShooterImpl(IMusicGun gun)
+            internal MusicShooterImpl(IReadOnlyList<IMusicGun> guns)
             {
-                m_gun = gun;
-                m_gun.Setup();
+                foreach (var gun in guns)
+                {
+                    m_table.Add(gun, new MusicPlayer(gun));
+                }
+
                 ShooterServices.Register(this);
             }
 
             public void Dispose()
             {
-                m_gun.Dispose();
-                foreach (var p in m_playList)
+                foreach (var gun in m_table)
                 {
-                    p.Dispose();
+                    gun.Value.Dispose();
                 }
-                m_history.Clear();
-                m_playList.Clear();
+                m_table.Clear();
             }
-
             public void OnUpdate(float dt)
             {
-                if (m_shot != null)
+                foreach (var item in m_table)
                 {
-                    m_shot.OnUpdate(dt);
-                    if (m_shot.IsCompleted )
-                    {
-                        m_shot?.Dispose();
-                        m_shot = default;
-                    }
-                }
-
-                for (int i = 0; i < m_playList.Count; i++)
-                {
-                    var p = m_playList[i];
-                    p.OnUpdate(dt);
-                }
-                for (int i = m_playList.Count - 1; i >= 0; i--)
-                {
-                    var p = m_playList[i];
-                    if (!p.IsPlaying)
-                    {
-                        p.Dispose();
-                    }
-                    if (p.IsDisposed)
-                    {
-                        m_playList.RemoveAt(i);
-                    }
+                    item.Value.OnUpdate(dt);
                 }
             }
 
-            /// <summary>
-            /// 履歴をクリアして再生
-            /// </summary>
-            public void Fire(IMusicAmmo ammo)
+            public void Fire(IMusicGun gun, IMusicAmmo ammo)
             {
-                m_history.Clear();
-                m_history.Push(ammo);
-
-                PlayCore(ammo);
-            }
-            /// <summary>
-            /// 履歴に積んで再生
-            /// </summary>
-            public void Pop()
-            {
-                if (m_history.Count <= 0)
+                if (m_table.TryGetValue(gun, out var player))
                 {
-                    // 履歴なしは何もしない
-                    return;
+                    player.Play(ammo);
                 }
-                var _ = m_history.Pop(); //最後の(今流れてるもの)を捨てる
-                var ammo = m_history.Peek();
-                PlayCore(ammo);
             }
-            /// <summary>
-            /// 履歴を戻して再生
-            /// </summary>
-            /// <param name="ammo"></param>
-            public void Push(IMusicAmmo ammo)
+
+            public void Pop( IMusicGun gun )
             {
-                if (m_history.Count > 0)
+                if (m_table.TryGetValue(gun, out var player))
                 {
-                    var current = m_history.Peek();
-                    if (ammo == current)
-                    {
-                        // 同じBGMだったら無視
-                        return;
-                    }
+                    player.Pop();
                 }
-                m_history.Push(ammo);
-                PlayCore(ammo);
             }
 
-
-            private void PlayCore(IMusicAmmo ammo)
+            public void Push(IMusicGun gun, IMusicAmmo ammo)
             {
-                var (playback, shot) = m_gun.Fire(this, ammo);
-                m_playList.Add(playback);
-                m_shot = shot;
+                if (m_table.TryGetValue(gun, out var player))
+                {
+                    player.Push(ammo);
+                }
+            }
+
+            public void Stop( IMusicGun gun )
+            {
+                if (m_table.TryGetValue(gun, out var player))
+                {
+                    player.Stop();
+                }
             }
         }
     }

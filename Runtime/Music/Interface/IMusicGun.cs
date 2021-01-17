@@ -6,6 +6,7 @@ namespace SoundShooter.Music
     public interface IMusicGun : IDisposable
     {
         void Setup();
-        (IMusicPlayback, IMusicShot) Fire(IMusicShooter shooter, IMusicAmmo ammo);
+        IMusicPlayback Fire(IMusicAmmo ammo);
+        IMusicShot Shot(IMusicPlayer player, IMusicPlayback playback);
     }
 }

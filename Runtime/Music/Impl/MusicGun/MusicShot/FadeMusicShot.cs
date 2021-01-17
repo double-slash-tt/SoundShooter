@@ -43,7 +43,7 @@ namespace SoundShooter.Music.Impl
         {
             var t = Mathf.InverseLerp(0, Duration, m_timeCount);
             var v = Mathf.Lerp(StartValue, EndValue, t);
-            Playback.SetVolume( v );
+            Playback?.SetVolume( v );
             m_timeCount += dt;
         }
     }

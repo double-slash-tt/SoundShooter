@@ -17,9 +17,9 @@ namespace SoundShooter.Music.Impl
         //=========================================
         // Method
         //=========================================
-        protected override IMusicShot Shot(IMusicShooter shooter, IMusicPlayback playback)
+        public override IMusicShot Shot(IMusicPlayer player, IMusicPlayback playback)
         {
-            var playlist = shooter.PlayList;
+            var playlist = player.PlayList;
             var list = new List<IMusicShot>();
             foreach (var p in playlist)
             {
@@ -27,8 +27,11 @@ namespace SoundShooter.Music.Impl
 
                 list.Add(fadeOut);
             }
-            var fadeIn = new FadeInMusicShot(m_duration, playback);
-            list.Add(fadeIn);
+            if (playback != null)
+            {
+                var fadeIn = new FadeInMusicShot(m_duration, playback);
+                list.Add(fadeIn);
+            }
             return new ParallelMusicShot( list );
         }
     }
