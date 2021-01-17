@@ -5,7 +5,7 @@ namespace SoundShooter.Music.Impl
     /// <summary>
     /// フェード動作
     /// </summary>
-    public sealed class FadeMusicShot : MusicShot
+    public abstract class FadeMusicShot : MusicShot
     {
         //===================================
         // Field
@@ -19,7 +19,7 @@ namespace SoundShooter.Music.Impl
         private float StartValue { get; }
         private float EndValue { get; }
 
-        private IMusicPlayback Playback { get; set; }
+        protected IMusicPlayback Playback { get; set; }
 
         public override bool IsCompleted => m_timeCount >= Duration;
 
@@ -39,12 +39,41 @@ namespace SoundShooter.Music.Impl
             Playback = default;
         }
 
-        public override void OnUpdate(float dt)
+        protected override void DoUpdate(float dt)
         {
             var t = Mathf.InverseLerp(0, Duration, m_timeCount);
             var v = Mathf.Lerp(StartValue, EndValue, t);
             Playback.SetVolume( v );
             m_timeCount += dt;
+        }
+    }
+
+    /// <summary>
+    /// フェードアウト用
+    /// </summary>
+    public sealed class FadeOutMusicShot : FadeMusicShot
+    {
+        public FadeOutMusicShot(float duration, IMusicPlayback playback) : base(playback.Volume, 0, duration, playback)
+        {
+        }
+
+        protected override void Complete()
+        {
+            Playback?.Stop();
+        }
+    }
+
+    /// <summary>
+    /// フェードイン用
+    /// </summary>
+    public sealed class FadeInMusicShot : FadeMusicShot
+    {
+        public FadeInMusicShot(float duration, IMusicPlayback playback) : base(0, 1, duration, playback)
+        {
+        }
+        protected override void Begin()
+        {
+            Playback?.Play();
         }
     }
 }

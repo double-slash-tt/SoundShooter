@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SoundShooter.Music
 {
@@ -7,6 +8,12 @@ namespace SoundShooter.Music
     /// </summary>
     public abstract class MusicShot : IMusicShot
     {
+        //=======================================
+        // Field
+        //=======================================
+        private bool m_isBegin = false;
+        private bool m_isFinish = false;
+
         //=======================================
         // Property
         //=======================================
@@ -22,9 +29,31 @@ namespace SoundShooter.Music
         }
         protected virtual void DoDispose() { }
 
-        public virtual void OnUpdate(float dt)
+        public void OnUpdate(float dt)
         {
+            if (!m_isBegin)
+            {
+                Begin();
+                m_isBegin = true;
+            }
 
+            DoUpdate(dt);
+            if (IsCompleted)
+            {
+                if (!m_isFinish)
+                {
+                    Complete();
+                    m_isFinish = true;
+                }
+            }
+        }
+
+        protected virtual void DoUpdate(float dt) { }
+        protected virtual void Begin()
+        {
+        }
+        protected virtual void Complete()
+        {
         }
     }
 }

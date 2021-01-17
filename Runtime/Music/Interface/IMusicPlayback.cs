@@ -12,5 +12,6 @@ namespace SoundShooter.Music
         void OnUpdate(float dt);
         void SetVolume(float v);
         void Play();
+        void Stop();
     }
 }

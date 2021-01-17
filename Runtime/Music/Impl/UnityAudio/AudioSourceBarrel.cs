@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,15 +14,37 @@ namespace SoundShooter.Music.Impl
         //======================================
         // Field
         //======================================
-        private List<AudioSource> m_sourceList = new List<AudioSource>();
+
+        [SerializeField] private int m_bufferCount = 3;
+
+        //======================================
+        // Field
+        //======================================
+        [NonSerialized] private List<AudioSource> m_sourceList = new List<AudioSource>();
 
         //======================================
         // Method
         //======================================
 
+        public override void Dispose()
+        {
+            for (int i = 0; i < m_sourceList.Count; i++)
+            {
+                var s = m_sourceList[i];
+                if (s)
+                {
+                    Destroy(s.gameObject);
+                }
+            }
+        }
+
+
         public override void Setup()
         {
-
+            for (int i = 0; i < m_bufferCount; i++)
+            {
+                Add();
+            }
         }
 
         protected override IMusicPlayback DoFire(AudioClipAmmo ammo)
@@ -40,6 +63,16 @@ namespace SoundShooter.Music.Impl
                     return source;
                 }
             }
+            if (m_sourceList.Count >= m_bufferCount)
+            {
+                // バッファ数を超えてたら止める
+                return m_sourceList[0];
+            }
+            var s = Add();
+            return s;
+        }
+        private AudioSource Add()
+        {
             var s = ShooterServices.Instantiate<AudioSource>(m_sourceList.Count.ToString());
             m_sourceList.Add(s);
 

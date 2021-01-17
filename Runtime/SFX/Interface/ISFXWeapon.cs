@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundShooter.SFX
 {
-    public interface ISFXWeapon
+    public interface ISFXWeapon : IDisposable
     {
         /// <summary>
         /// 発射

@@ -26,6 +26,8 @@ namespace SoundShooter.Music
         }
         protected virtual void DoDispose() { }
         public abstract void Play();
+        public abstract void Stop();
+
         public virtual void OnUpdate(float dt) { }
         public abstract void SetVolume(float v);
 

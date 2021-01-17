@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SoundShooter.Music
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract class MusicBarrel : ScriptableObject
+    public abstract class MusicBarrel : ScriptableObject,IDisposable
     {
+        public virtual void Dispose() { }
         public virtual void Setup() { }
         public abstract IMusicPlayback Fire( IMusicAmmo ammo );
+
     }
     public abstract class MusicBarrel<TAmmo> : MusicBarrel where TAmmo : IMusicAmmo
     {

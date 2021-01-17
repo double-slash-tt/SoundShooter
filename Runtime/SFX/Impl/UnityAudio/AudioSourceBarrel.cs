@@ -23,6 +23,14 @@ namespace SoundShooter.SFX.Impl
         // Method
         //======================================
 
+        public override void Dispose()
+        {
+            if (m_audioSource)
+            {
+                Destroy(m_audioSource.gameObject);
+            }
+        }
+
         /// <summary>
         /// 初期化処理
         /// </summary>

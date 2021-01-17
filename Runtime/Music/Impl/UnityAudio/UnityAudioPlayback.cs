@@ -41,6 +41,13 @@ namespace SoundShooter.Music.Impl
                 AudioSource.Play();
             }
         }
+        public override void Stop()
+        {
+            if (AudioSource)
+            {
+                AudioSource.Stop();
+            }
+        }
 
         public override void SetVolume(float v)
         {

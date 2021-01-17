@@ -40,7 +40,7 @@ namespace SoundShooter.Music.Impl
             m_list = default;
         }
 
-        public override void OnUpdate(float dt)
+        protected override void DoUpdate(float dt)
         {
             if (m_list == null)
             {

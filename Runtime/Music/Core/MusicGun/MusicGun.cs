@@ -13,6 +13,13 @@ namespace SoundShooter.Music
         // Method
         //========================================
 
+        public void Dispose()
+        {
+            if (m_barrel)
+            {
+                m_barrel.Dispose();
+            }
+        }
         public void Setup()
         {
             m_barrel.Setup();

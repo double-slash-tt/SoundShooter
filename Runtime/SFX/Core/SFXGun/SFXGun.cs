@@ -23,6 +23,14 @@ namespace SoundShooter.SFX
         // Method
         //=================================
 
+        public override void Dispose()
+        {
+            if (m_barrel)
+            {
+                m_barrel.Dispose();
+            }
+        }
+
         public override void Setup()
         {
             m_barrel.Setup();

@@ -23,11 +23,11 @@ namespace SoundShooter.Music.Impl
             var list = new List<IMusicShot>();
             foreach (var p in playlist)
             {
-                var fadeOut = new FadeMusicShot(p.Volume, 0, m_duration, p);
-                
+                var fadeOut = new FadeOutMusicShot(m_duration, p);
+
                 list.Add(fadeOut);
             }
-            var fadeIn = new FadeMusicShot(0, 1, m_duration, playback);
+            var fadeIn = new FadeInMusicShot(m_duration, playback);
             list.Add(fadeIn);
             return new ParallelMusicShot( list );
         }

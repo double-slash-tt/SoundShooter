@@ -45,6 +45,7 @@ namespace SoundShooter.Music
 
             public void Dispose()
             {
+                m_gun.Dispose();
                 foreach (var p in m_playList)
                 {
                     p.Dispose();
@@ -84,6 +85,9 @@ namespace SoundShooter.Music
                 }
             }
 
+            /// <summary>
+            /// 履歴をクリアして再生
+            /// </summary>
             public void Fire(IMusicAmmo ammo)
             {
                 m_history.Clear();
@@ -91,14 +95,35 @@ namespace SoundShooter.Music
 
                 PlayCore(ammo);
             }
+            /// <summary>
+            /// 履歴に積んで再生
+            /// </summary>
             public void Pop()
             {
-                var ammo = m_history.Pop();
+                if (m_history.Count <= 0)
+                {
+                    // 履歴なしは何もしない
+                    return;
+                }
+                var _ = m_history.Pop(); //最後の(今流れてるもの)を捨てる
+                var ammo = m_history.Peek();
                 PlayCore(ammo);
             }
-
+            /// <summary>
+            /// 履歴を戻して再生
+            /// </summary>
+            /// <param name="ammo"></param>
             public void Push(IMusicAmmo ammo)
             {
+                if (m_history.Count > 0)
+                {
+                    var current = m_history.Peek();
+                    if (ammo == current)
+                    {
+                        // 同じBGMだったら無視
+                        return;
+                    }
+                }
                 m_history.Push(ammo);
                 PlayCore(ammo);
             }

@@ -12,6 +12,9 @@ namespace SoundShooter.SFX
     /// </summary>
     public abstract class SFXWeapon : ScriptableObject, ISFXWeapon
     {
+
+        public virtual void Dispose() { }
+
         /// <summary>
         /// 初期化
         /// </summary>

@@ -2,6 +2,7 @@
 
 namespace SoundShooter.Music
 {
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(Music) + "/" + nameof(MusicTrigger))]
     public class MusicTrigger : ScriptableObject
     {
         //=========================================
@@ -15,6 +16,14 @@ namespace SoundShooter.Music
         public void Fire()
         {
             MusicShooter.Fire( m_ammo );
+        }
+        public void Push()
+        {
+            MusicShooter.Push(m_ammo);
+        }
+        public void Pop()
+        {
+            MusicShooter.Pop();
         }
     }
 }
