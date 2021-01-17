@@ -2,7 +2,8 @@
 
 namespace SoundShooter.Music.Impl
 {
-    public class AudioClipAmmo : ScriptableObject,IMusicAmmo
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(Music) + "/" + nameof(MusicAmmo) + "/" + nameof(AudioClipAmmo))]
+    public class AudioClipAmmo : MusicAmmo, IMusicAmmo
     {
         //==========================================
         // SerializeField

@@ -2,7 +2,7 @@
 
 namespace SoundShooter.Music
 {
-    public class MusicGun : ScriptableObject, IMusicGun
+    public abstract class MusicGun : ScriptableObject, IMusicGun
     {
         //========================================
         // SerializeField
@@ -18,9 +18,13 @@ namespace SoundShooter.Music
             m_barrel.Setup();
         }
 
-        public void Fire(IMusicAmmo ammo)
+        public (IMusicPlayback, IMusicShot) Fire(IMusicShooter shooter, IMusicAmmo ammo)
         {
             var playback = m_barrel.Fire(ammo);
+            var shot = Shot(shooter, playback);
+            return (playback, shot);
         }
+
+        protected abstract IMusicShot Shot(IMusicShooter shooter, IMusicPlayback playback);
     }
 }

@@ -2,7 +2,11 @@
 
 namespace SoundShooter.Music
 {
-    public class MusicShooterProvider : SoundShooterProvider
+    /// <summary>
+    /// Musicシステムの初期化マシン
+    /// </summary>
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(Music) + "/" + nameof(MusicShooter), order = -1)]
+    public sealed class MusicShooterProvider : SoundShooterProvider
     {
         //===================================
         // SerializeField
