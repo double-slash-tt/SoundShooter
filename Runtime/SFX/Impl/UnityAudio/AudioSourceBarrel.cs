@@ -16,12 +16,20 @@ namespace SoundShooter.SFX.Impl
         //======================================
         // Field
         //======================================
-        private ListBuffer<ISFXPlayback> m_list = new ListBuffer<ISFXPlayback>(() => new SFXAudioClipPlayback());
+        private ListBuffer<ISFXPlayback> m_list = new ListBuffer<ISFXPlayback>(() => new AudioClipPlayback());
         private AudioSource m_audioSource = default;
 
         //======================================
         // Method
         //======================================
+
+        public override void Dispose()
+        {
+            if (m_audioSource)
+            {
+                Destroy(m_audioSource.gameObject);
+            }
+        }
 
         /// <summary>
         /// 初期化処理
@@ -39,7 +47,7 @@ namespace SoundShooter.SFX.Impl
         /// </summary>
         protected sealed override ISFXPlayback DoFire(ISFXWeapon weapon, AudioClipAmmo ammo)
         {
-            var op = m_list.Alloc() as SFXAudioClipPlayback;
+            var op = m_list.Alloc() as AudioClipPlayback;
             op.Setup( weapon, m_audioSource, ammo );
 
             return op;

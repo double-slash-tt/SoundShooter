@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SoundShooter.SFX
 {
-    public abstract class SFXBarrel : ScriptableObject
+    public abstract class SFXBarrel : ScriptableObject, IDisposable
     {
         //===========================================
         // SerializeField
@@ -23,6 +23,7 @@ namespace SoundShooter.SFX
         // Method
         //===========================================
 
+        public virtual void Dispose() { }
         /// <summary>
         /// 初期化
         /// </summary>

@@ -48,6 +48,10 @@ namespace SoundShooter.SFX
             /// </summary>
             public void Dispose()
             {
+                foreach (var w in m_weapons)
+                {
+                    w.Dispose();
+                }
                 m_list.Clear();
             }
 

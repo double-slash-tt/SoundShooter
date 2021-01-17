@@ -6,7 +6,7 @@ namespace SoundShooter
     /// <summary>
     /// Soundシステム初期化マシン
     /// </summary>
-    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(ShooterServices), order = -1)]
+    [CreateAssetMenu(menuName = nameof(SoundShooter) + "/" + nameof(ShooterServices), order = -1000)]
     public class ShooterServiceProvider : ScriptableObject
     {
         //============================================
